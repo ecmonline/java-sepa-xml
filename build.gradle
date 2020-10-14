@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'java-gradle-plugin'
+
+group = 'online.ecm'
+description = "java-sepa-xml"
+version = '1.0'
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'java-sepa-xml'
+
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            //repo here
+        }
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.13.1'
+}
