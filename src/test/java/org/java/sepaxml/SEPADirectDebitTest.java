@@ -44,6 +44,7 @@ public class SEPADirectDebitTest {
                     "TTV",
                     new Date(),
                     SEPATransaction.Currency.EUR,
+                    SEPATransaction.Purpose.BENE,
                     null));
         }
 

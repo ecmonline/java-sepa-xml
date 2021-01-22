@@ -64,6 +64,7 @@ public abstract class SEPA {
         this.nodePmtInf.append("CtrlSum").value(this.getTransactionVolume().doubleValue());
 
         XMLNode nodePmtTpInf = this.nodePmtInf.append("PmtTpInf");
+        nodePmtTpInf.append("InstrPrty").value("NORM");
         nodePmtTpInf.append("SvcLvl").append("Cd").value("SEPA");
         // nodePmtTpInf.append("LclInstrm").append("Cd").value("CORE"); // only necessary for PAIN 008 (Lastschrift)
         // nodePmtTpInf.append("SeqTp").append("Cd").value("FRST"); // only necessary for PAIN 008 (Lastschrift)

@@ -12,6 +12,10 @@ public class SEPATransaction {
 		CHF, GBP
 	}
 
+	public enum Purpose {
+		SALA, STDY, BENE, PENS, SSBE, AGRT, TAXS, BECH
+	}
+
 	private SEPABankAccount bankAccount;
 
 	private String id;
@@ -24,6 +28,7 @@ public class SEPATransaction {
 	private Date mandatReferenceDate;
 
 	private Currency currency = Currency.EUR;
+	private Purpose purpose = Purpose.BENE;
 	private String remittance;
 
 	public SEPATransaction(
@@ -34,6 +39,7 @@ public class SEPATransaction {
 		String mandatReference,
 		Date mandatReferenceDate,
 		Currency currency,
+		Purpose purpose,
 		String remittance
 	) {
 		this.bankAccount = bankAccount;
@@ -43,6 +49,7 @@ public class SEPATransaction {
 		this.mandatReference = mandatReference;
 		this.mandatReferenceDate = mandatReferenceDate;
 		this.currency = currency;
+		this.purpose = purpose;
 		this.remittance = remittance;
 	}
 
@@ -54,15 +61,19 @@ public class SEPATransaction {
 			String mandatReference,
 			Date mandatReferenceDate
 	) {
-		this(bankAccount, value, subject, date, mandatReference, mandatReferenceDate, Currency.EUR, null);
+		this(bankAccount, value, subject, date, mandatReference, mandatReferenceDate, Currency.EUR, Purpose.BENE, null);
 	}
 
 	public SEPATransaction(SEPABankAccount bankAccount, BigDecimal value, String subject) {
-		this(bankAccount, value, subject, new Date(), null, null, Currency.EUR, null);
+		this(bankAccount, value, subject, new Date(), null, null, Currency.EUR, Purpose.BENE, null);
 	}
 
 	public SEPATransaction(SEPABankAccount bankAccount, BigDecimal value, String subject, Currency currency) {
-		this(bankAccount, value, subject, new Date(), null, null, currency, null);
+		this(bankAccount, value, subject, new Date(), null, null, currency, Purpose.BENE, null);
+	}
+
+	public SEPATransaction(SEPABankAccount bankAccount, BigDecimal value, String subject, Currency currency, Purpose purpose) {
+		this(bankAccount, value, subject, new Date(), null, null, currency, purpose, null);
 	}
 
 	public String getId() {
@@ -110,6 +121,8 @@ public class SEPATransaction {
 	public Currency getCurrency() {
 		return currency;
 	}
+
+	public Purpose getPurpose() { return purpose; }
 
 	public String getRemittance() { return remittance; }
 }
