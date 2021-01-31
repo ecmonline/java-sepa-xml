@@ -3,6 +3,7 @@ package org.java.sepaxml;
 import org.java.sepaxml.format.SEPAFormatFilter;
 import org.java.sepaxml.validator.SEPAValidatorIBAN;
 import org.java.sepaxml.validator.SEPAValidatorBIC;
+import org.java.sepaxml.validator.exception.SEPAValidatorBICFormatException;
 import org.java.sepaxml.validator.exception.SEPAValidatorIBANFormatException;
 
 public class SEPABankAccount {
@@ -23,19 +24,17 @@ public class SEPABankAccount {
         return name;
     }
 
-    public SEPABankAccount(String IBAN, String name) {
-        this(IBAN, null, name);
-    }
-
     public SEPABankAccount(String IBAN, String BIC, String name) {
         if (SEPAValidatorIBAN.isValid(IBAN)) {
             this.IBAN = SEPAFormatFilter.filter(IBAN);
         } else {
-                throw new SEPAValidatorIBANFormatException("Invalid IBAN: " + IBAN);
+            throw new SEPAValidatorIBANFormatException("Invalid IBAN: " + IBAN);
         }
 
         if (BIC != null && SEPAValidatorBIC.isValid(BIC)) {
             this.BIC = SEPAFormatFilter.filterBIC(BIC);
+        } else {
+            throw new SEPAValidatorBICFormatException("Invalid BIC: " + BIC);
         }
 
         this.name = name;
