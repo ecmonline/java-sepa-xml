@@ -13,7 +13,14 @@ public class SEPATransaction {
 	}
 
 	public enum Purpose {
-		SALA, STDY, BENE, PENS, SSBE, AGRT, TAXS, BECH
+		BENE, 	// SEPA Gutschrift Arbeitslosengeld
+		BONU, 	// SEPA Gutschrift Bonuszahlung
+		CBFF, 	// SEPA Gutschrift VL-Zahlung / VWL-Zahlung
+		CHAR, 	// SEPA Gutschrift Spendenzahlung
+		GOVT, 	// SEPA Gutschrift öffentliche Kassen
+		PENS, 	// SEPA Gutschrift Rente / Pension
+		SALA, 	// SEPA Gutschrift Lohn / Gehalt
+		SSBE 	// SEPA Gutschrift Sozialleistung
 	}
 
 	private SEPABankAccount bankAccount;
