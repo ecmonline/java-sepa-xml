@@ -17,6 +17,16 @@ public class SEPACreditTransfer extends SEPA {
         this.build();
     }
 
+    public SEPACreditTransfer(SEPABankAccount sender, List<SEPATransaction> transactions, PaymentMethods paymentMethod) {
+        this(sender, transactions, new Date(), paymentMethod);
+    }
+
+    public SEPACreditTransfer(SEPABankAccount sender, List<SEPATransaction> transactions, Date executionDate, PaymentMethods paymentMethod) {
+        super(sender, transactions, executionDate);
+        super.setPaymentMethod(paymentMethod);
+        this.build();
+    }
+
     @Override
     protected String getType() {
         return "Db";
@@ -47,9 +57,11 @@ public class SEPACreditTransfer extends SEPA {
                     .append("Id").append("IBAN")
                     .value(transaction.getBankAccount().getIBAN());
 
-            nodeCdtTrfTxInf.append("RmtInf")
-                    .append("Ustrd")
-                    .value(transaction.getSubject());
+            if (transaction.getPurpose() != null) {
+                nodeCdtTrfTxInf.append("Purp")
+                        .append("Cd")
+                        .value(transaction.getPurpose().toString());
+            }
 
             if (transaction.getRemittance() != null) {
                 nodeCdtTrfTxInf.append("RmtInf")

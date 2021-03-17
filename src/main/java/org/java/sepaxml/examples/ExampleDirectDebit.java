@@ -33,6 +33,7 @@ public class ExampleDirectDebit {
                             "MYCOMP11111111",
                             new Date(),
                             SEPATransaction.Currency.EUR,
+                            SEPATransaction.Purpose.BENE,
                             "No Information"
                     )
             );
@@ -49,6 +50,7 @@ public class ExampleDirectDebit {
                             "MYCOMP22222222",
                             new Date(),
                             SEPATransaction.Currency.EUR,
+                            SEPATransaction.Purpose.BENE,
                             "No Information"
                     )
             );
@@ -65,6 +67,7 @@ public class ExampleDirectDebit {
                             "MYCOMP11111111",
                             new Date(),
                             SEPATransaction.Currency.EUR,
+                            SEPATransaction.Purpose.BENE,
                             "No Information"
                     )
             );
